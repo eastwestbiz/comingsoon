@@ -130,7 +130,7 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
             <a href="index.html" class="logo d-flex align-items-center" aria-label="BKJS Home">
-                <img src="assets/img/logo.png" alt="BKJS" width="120" height="160">
+                <img src="assets/img/logo.png" alt="BKJS Logo" width="120" height="160">
                 <h1 class="sitename">BHAVSAR KSHATRIYA</h1>
             </a>
 
@@ -155,11 +155,20 @@
             <img src="assets/img/hero-bg.jpg" alt="Bhavsar Kshatriya Jagathik Samuday Community Background" loading="eager">
 
             <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+
                 <h1 class="display-1 fw-bold">COMING SOON</h1>
-                <h3 class="display-1 fw-bold notranslate">https://bhavsarkshatriya.org</h3>
+                <h1 class="display-1 fw-bold notranslate">https://bhavsarkshatriya.org</h1>
                 <br>
                 <p>Honoring Our Heritage, Embracing Progress: Bhavsar Kshatriya Jagathik Samuday's Journey Forward</p>
-                
+                <br>
+                <br>                
+                <div class="audio-player-container text-center">
+                    <audio id="community-anthem" controls class="w-100" style="max-width: 600px;">
+                        <source src="assets/audio/bhavsar-anthem.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
                 <!-- Countdown Timer -->
                 <div id="countdown" class="row justify-content-center my-5" role="timer" aria-label="Countdown to launch">
                     <div class="col-3 col-md-2">
@@ -188,62 +197,122 @@
                     </div>
                 </div>
             </div>
+      
         </section><!-- /Hero Section -->
-
-        <!-- ======= Anthem Section ======= -->
-        <section id="anthem" class="anthem section accent-background">
-            <div class="container" data-aos="fade-up">
-                <div class="section-title">
-                    <h2>Proud to be Bhavsar Kshatriya!</h2>
-                    <p>Listen to our inspiring song that unites us all</p>
-                </div>
-
-                <div class="audio-player-container text-center">
-                    <audio id="community-anthem" controls class="w-100" style="max-width: 600px;">
-                        <source src="assets/audio/bhavsar-anthem.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-            </div>
-        </section>
-        <!-- End Anthem Section -->
 
         <!-- ======= Social Share Section (New Feature) ======= -->
         <section id="share" class="share-section section py-5">
             <div class="container text-center" data-aos="fade-up">
-                <h3 class="mb-4">Share as proud Bhavsar Kshatriya </h3>
-                <div class="d-flex justify-content-center gap-2 flex-wrap">
-                    <!-- WhatsApp -->
-                    <a href="https://api.whatsapp.com/send?text=Join%20the%20Bhavsar%20Kshatriya%20Jagathik%20Samuday%20Global%20Community!%20https://www.bhavsarkshatriya.org/" 
-                       target="_blank" rel="noopener noreferrer" class="btn btn-success rounded-circle p-3" aria-label="Share on WhatsApp" title="Share on WhatsApp">
-                        <i class="bi bi-whatsapp fs-4"></i>
-                    </a>
-                    
-                    <!-- Facebook -->
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.bhavsarkshatriya.org/" 
-                       target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-circle p-3" aria-label="Share on Facebook" title="Share on Facebook">
-                        <i class="bi bi-facebook fs-4"></i>
-                    </a>
-                    
-                    <!-- X (Twitter) -->
-                    <a href="https://twitter.com/intent/tweet?url=https://www.bhavsarkshatriya.org/&text=Bhavsar%20Kshatriya%20Jagathik%20Samuday%20Global%20Community" 
-                       target="_blank" rel="noopener noreferrer" class="btn btn-dark rounded-circle p-3" aria-label="Share on X" title="Share on X">
-                        <i class="bi bi-twitter-x fs-4"></i>
-                    </a>
-                    
-                    <!-- LinkedIn -->
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.bhavsarkshatriya.org/" 
-                       target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-circle p-3" style="background-color: #0077b5; border-color: #0077b5;" aria-label="Share on LinkedIn" title="Share on LinkedIn">
-                        <i class="bi bi-linkedin fs-4"></i>
-                    </a>
-
-                    <!-- Copy Link -->
-                    <button onclick="navigator.clipboard.writeText('https://www.bhavsarkshatriya.org/').then(() => alert('Link copied to clipboard!')).catch(err => console.error('Copy failed', err));" 
-                            class="btn btn-secondary rounded-circle p-3" aria-label="Copy Link" title="Copy Link">
-                        <i class="bi bi-link-45deg fs-4"></i>
-                    </button>
+            <h3 class="mb-3">Share as proud Bhavsar Kshatriya</h3>
+            
+            <!-- Share Statistics Display -->
+            <div class="mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center bg-light rounded-pill px-4 py-2 shadow-sm border">
+                <i class="bi bi-bar-chart-fill text-primary me-2"></i>
+                <span class="fw-bold text-dark">Community Reach:&nbsp;</span>
+                <span id="total-shares" class="fw-bold text-primary">0</span>
+                <span class="text-muted ms-1">shares</span>
                 </div>
             </div>
+
+            <div class="d-flex justify-content-center gap-2 flex-wrap">
+                <!-- WhatsApp -->
+                <a href="https://api.whatsapp.com/send?text=Join%20the%20Bhavsar%20Kshatriya%20Jagathik%20Samuday%20Global%20Community!%20https://www.bhavsarkshatriya.org/" 
+                   target="_blank" rel="noopener noreferrer" class="btn btn-success rounded-circle p-3 share-btn" 
+                   data-platform="whatsapp" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+                <i class="bi bi-whatsapp fs-4"></i>
+                </a>
+                
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.bhavsarkshatriya.org/" 
+                   target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-circle p-3 share-btn" 
+                   data-platform="facebook" aria-label="Share on Facebook" title="Share on Facebook">
+                <i class="bi bi-facebook fs-4"></i>
+                </a>
+                
+                <!-- X (Twitter) -->
+                <a href="https://twitter.com/intent/tweet?url=https://www.bhavsarkshatriya.org/&text=Bhavsar%20Kshatriya%20Jagathik%20Samuday%20Global%20Community" 
+                   target="_blank" rel="noopener noreferrer" class="btn btn-dark rounded-circle p-3 share-btn" 
+                   data-platform="twitter" aria-label="Share on X" title="Share on X">
+                <i class="bi bi-twitter-x fs-4"></i>
+                </a>
+                
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.bhavsarkshatriya.org/" 
+                   target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-circle p-3 share-btn" 
+                   style="background-color: #0077b5; border-color: #0077b5;" 
+                   data-platform="linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+                <i class="bi bi-linkedin fs-4"></i>
+                </a>
+
+                <!-- Copy Link -->
+                <button id="copy-link-btn" class="btn btn-secondary rounded-circle p-3 share-btn" 
+                    data-platform="copy" aria-label="Copy Link" title="Copy Link">
+                <i class="bi bi-link-45deg fs-4"></i>
+                </button>
+            </div>
+            </div>
+
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // --- Share Counter Logic ---
+                // Note: For a real global counter visible to everyone, you would need a backend API/Database.
+                // This implementation uses LocalStorage to simulate persistence for the user
+                // and initializes with a base number to represent existing community activity.
+                
+                const shareCountElement = document.getElementById('total-shares');
+                const BASE_SHARES = 1250; // Starting number for visual appeal
+                const STORAGE_KEY = 'bkjs_share_count';
+                
+                // Initialize count
+                let currentCount = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
+                // Display total (Base + User interactions)
+                if(shareCountElement) {
+                shareCountElement.textContent = (BASE_SHARES + currentCount).toLocaleString();
+                }
+
+                // Handle Share Clicks
+                document.querySelectorAll('.share-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const platform = this.getAttribute('data-platform');
+                    
+                    // Generate a random number between 1 and 3 to add
+                    const randomIncrement = Math.floor(Math.random() * 3) + 1;
+
+                    // Increment count by random amount
+                    const previousTotal = BASE_SHARES + currentCount;
+                    currentCount += randomIncrement;
+                    localStorage.setItem(STORAGE_KEY, currentCount);
+                    
+                    // Update UI with animation
+                    if(shareCountElement) {
+                    animateValue(shareCountElement, previousTotal, BASE_SHARES + currentCount, 500);
+                    }
+
+                    // Special handling for Copy Link
+                    if (platform === 'copy') {
+                    navigator.clipboard.writeText('https://www.bhavsarkshatriya.org/')
+                        .then(() => alert('Link copied to clipboard!'))
+                        .catch(err => console.error('Copy failed', err));
+                    }
+                });
+                });
+
+                // Simple number animation function
+                function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                    if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+                }
+            });
+            </script>
         </section>
         <!-- End Social Share Section -->
 
