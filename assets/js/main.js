@@ -1770,3 +1770,103 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });              
+
+//-----------------------------------------------
+// Mobile Responsiveness Enhancements
+//-----------------------------------------------
+
+/**
+ * Mobile Viewport Height Fix
+ * Calculates the real viewport height (excluding browser UI) and sets it as a CSS variable --vh
+ * This fixes the "100vh" issue on mobile browsers where the address bar covers content
+ * Usage in CSS: height: calc(var(--vh, 1vh) * 100);
+ */
+function setMobileViewportHeight() {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+// Update on resize and orientation change
+window.addEventListener('resize', setMobileViewportHeight);
+window.addEventListener('orientationchange', setMobileViewportHeight);
+// Initial set
+setMobileViewportHeight();
+
+/**
+ * Touch Device Detection
+ * Adds 'touch-device' class to body for specific CSS targeting
+ * Helps prevent sticky hover states on mobile devices
+ */
+function detectTouchDevice() {
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (isTouch) {
+    document.body.classList.add('touch-device');
+    // Remove hover classes on touch start to prevent sticky hovers
+    document.addEventListener('touchstart', function() {}, {passive: true});
+  } else {
+    document.body.classList.add('no-touch');
+  }
+}
+document.addEventListener('DOMContentLoaded', detectTouchDevice);
+
+/**
+ * Responsive Table Wrapper
+ * Automatically wraps tables in a scrollable container for mobile screens
+ * Ensures data tables don't break the layout width
+ */
+document.addEventListener('DOMContentLoaded', function() {
+  const tables = document.querySelectorAll('table');
+  tables.forEach(table => {
+    // Check if already wrapped to avoid duplication
+    if (!table.parentElement.classList.contains('table-responsive')) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'table-responsive';
+      // Add styles for horizontal scrolling
+      wrapper.style.overflowX = 'auto';
+      wrapper.style.webkitOverflowScrolling = 'touch'; // Smooth scrolling on iOS
+      wrapper.style.marginBottom = '1rem';
+      wrapper.style.width = '100%';
+      
+      // Wrap the table
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    }
+  });
+});
+
+/**
+ * Orientation Change Handler
+ * Refreshes critical layout components (Isotope, Swiper, AOS) when device rotates
+ * Ensures layout doesn't break when switching between portrait and landscape
+ */
+window.addEventListener('orientationchange', function() {
+  // Small delay to allow browser layout to settle after rotation
+  setTimeout(() => {
+    // Refresh AOS animations
+    if (typeof AOS !== 'undefined') AOS.refresh();
+    
+    // Refresh Isotope layouts if they exist
+    if (typeof Isotope !== 'undefined') {
+      document.querySelectorAll('.isotope-layout').forEach(item => {
+        const container = item.querySelector('.isotope-container');
+        if (container) {
+          const iso = Isotope.data(container);
+          if (iso) iso.layout();
+        }
+      });
+    }
+    
+    // Update Swiper instances
+    if (typeof Swiper !== 'undefined') {
+      document.querySelectorAll('.swiper').forEach(swiperEl => {
+        if (swiperEl.swiper) swiperEl.swiper.update();
+      });
+    }
+    
+    // Recalculate scroll offsets and sticky headers
+    if (typeof toggleScrolled === 'function') toggleScrolled();
+    
+    // Recalculate mobile viewport height
+    setMobileViewportHeight();
+  }, 200);
+});
