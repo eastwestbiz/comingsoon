@@ -1590,108 +1590,91 @@ function initGoogleTranslatePersistence() {
       var date = new Date();
       date.setDate(date.getDate() + days);
       expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + (value || "") + expires + "; path=/";
     }
-  
-    // Function to get a cookie
-      function getCookie(name) {
-        var nameEQ = name + "=";
-          var ca = document.cookie.split(';');
-          for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-          }
-          return null;
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  // Function to get a cookie
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+  // Check for existing language preference
+  var savedLang = getCookie('googtrans');
+  if (savedLang) {
+    // Wait for Google Translate widget to load
+    var interval = setInterval(function() {
+      if (typeof google !== 'undefined' && google.translate && google.translate.TranslateElement) {
+        clearInterval(interval);
+        var select = document.querySelector('.goog-te-combo');
+        if (select) {
+          select.value = savedLang;
+          select.dispatchEvent(new Event('change'));
         }
+      }
+    }, 100);
+  }
 
-          // Check for existing language preference
-          var savedLang = getCookie('googtrans');
-          if (savedLang) {
-            // Wait for Google Translate widget to load
-            var interval = setInterval(function() {
-            if (typeof google !== 'undefined' && google.translate.TranslateElement) {
-              clearInterval(interval);
-              var select = document.querySelector('.goog-te-combo');
-              if (select) {
-              select.value = savedLang;
-              select.dispatchEvent(new Event('change'));
-              }
-            }
-            }, 100);
-          }
-          
-          // Listen for changes in the Google Translate dropdown
-          var select = document.querySelector('.goog-te-combo');
-          if (select) {
-            select.addEventListener('change', function() {
-            setCookie('googtrans', this.value, 365); // Store selected language in cookie for 1 year
-          });
-             }
+  // Listen for changes in the Google Translate dropdown and apply mobile styles
+  var checkWidgetInterval = setInterval(function() {
+    var select = document.querySelector('.goog-te-combo');
+    if (select) {
+      clearInterval(checkWidgetInterval);
+      
+      // Add change listener
+      select.addEventListener('change', function() {
+        setCookie('googtrans', this.value, 365); // Store selected language in cookie for 1 year
+      });
 
-          // Consolidate initialization functions
-          function initMobileNav() {
-            const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+      // Apply Mobile Responsive Styles
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .goog-te-combo {
+          width: 100% !important;
+          max-width: 100% !important;
+          margin: 5px 0 !important;
+          padding: 8px !important;
+          font-size: 14px !important;
+          box-sizing: border-box !important;
+          height: auto !important;
+        }
+        #google_translate_element {
+          width: 100%;
+          overflow: hidden;
+          text-align: center;
+        }
+        .goog-te-gadget {
+          width: 100%;
+          font-family: inherit !important;
+          color: transparent !important; /* Hide 'Powered by Google' text if desired */
+        }
+        .goog-te-gadget span {
+          display: none !important; /* Hide 'Powered by Google' text */
+        }
+        .goog-te-gadget .goog-te-combo {
+          color: #333 !important; /* Reset text color for dropdown */
+        }
+        /* Hide Google's top frame if it appears */
+        .goog-te-banner-frame {
+          display: none !important;
+        }
+        body {
+          top: 0px !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, 500);
 
-            function mobileNavToogle() {
-              document.querySelector('body').classList.toggle('mobile-nav-active');
-              mobileNavToggleBtn.classList.toggle('bi-list');
-              mobileNavToggleBtn.classList.toggle('bi-x');
-            }
-
-            mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
-
-            document.querySelectorAll('#navmenu a').forEach(navmenu => {
-              navmenu.addEventListener('click', () => {
-                if (document.querySelector('.mobile-nav-active')) {
-                  mobileNavToogle();
-                }
-              });
-            });
-          }
-
-
-          // Optimize scroll event listeners using a single throttle function
-            function throttle(func, limit) {
-              let lastFunc;
-              let lastRan;
-              return function() {
-                const context = this;
-                const args = arguments;
-                if (!lastRan) {
-                  func.apply(context, args);
-                  lastRan = Date.now();
-                  } else {
-                    clearTimeout(lastFunc);
-                    lastFunc = setTimeout(function() {
-                    if (Date.now() - lastRan >= limit) {
-                      func.apply(context, args);
-                      lastRan = Date.now();
-                      }
-                    }, limit - (Date.now() - lastRan));
-            }
-              };
-                 }
-
-            document.addEventListener('scroll', throttle(function() {
-              toggleScrolled();
-              toggleScrollTop();
-              navmenuScrollspy();
-               }, 100));
-
-                    // Preloader removal: use only the animated removal for smooth UX
-                    function initPreloader() {
-                      var preloader = document.getElementById('preloader');
-                      if (preloader) {
-                        window.addEventListener('load', function () {
-                          preloader.style.opacity = '0';
-                          setTimeout(() => preloader.remove(), 500);
-                        });
-                      }
-                    }
-                                  } // <-- Close initGoogleTranslatePersistence
-              // End of Google Translate persistence script
+} // <-- Close initGoogleTranslatePersistence
+// End of Google Translate persistence script
                                 
 //-----------------------------------------------
 // Anthem Player Functionality
@@ -1870,3 +1853,4 @@ window.addEventListener('orientationchange', function() {
     setMobileViewportHeight();
   }, 200);
 });
+
