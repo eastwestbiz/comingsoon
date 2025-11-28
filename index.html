@@ -1,594 +1,89 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/WebPage">
-
-<head>
+<html>
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    
-    <!-- Primary Meta Tags -->
-    <title>BHAVSAR KSHATRIYA JAGATHIK SAMUDAY | Global Community</title>
-    <meta name="title" content="BHAVSAR KSHATRIYA JAGATHIK SAMUDAY | Global Community">
-    <meta name="description" content="Join the Bhavsar Kshatriya Jagathik Samuday (BKJS). A global community dedicated to serving Bhavsar descendants, fostering unity, culture, and growth worldwide.">
-    <meta name="keywords" content="bhavsar, bhavasar kshatriya, bhavsar kshatriya samaj, bkjs, bhavsar community, global bhavsar, kshatriya community">
-    <meta name="author" content="BKJS IT Cell">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
 
-    <!-- Canonical Link -->
-    <link rel="canonical" href="https://www.bhavsarkshatriya.org/">
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/12.6.0/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/12.6.0/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/12.6.0/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/12.6.0/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/12.6.0/firebase-functions-compat.js"></script>
+    <script defer src="/__/firebase/12.6.0/firebase-messaging-compat.js"></script>
+    <script defer src="/__/firebase/12.6.0/firebase-storage-compat.js"></script>
+    <script defer src="/__/firebase/12.6.0/firebase-analytics-compat.js"></script>
+    <script defer src="/__/firebase/12.6.0/firebase-remote-config-compat.js"></script>
+    <script defer src="/__/firebase/12.6.0/firebase-performance-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.bhavsarkshatriya.org/">
-    <meta property="og:title" content="BHAVSAR KSHATRIYA JAGATHIK SAMUDAY | Global Community">
-    <meta property="og:description" content="A global community dedicated to serving Bhavsar descendants in all aspects of life, fostering unity, culture, and growth worldwide.">
-    <meta property="og:image" content="https://www.bhavsarkshatriya.org/assets/img/logo.png">
-    <meta property="og:image:alt" content="BKJS Community Logo">
-    <meta property="og:site_name" content="Bhavsar Kshatriya Jagathik Samuday">
-    <meta property="og:locale" content="en_US">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.bhavsarkshatriya.org/">
-    <meta property="twitter:title" content="BHAVSAR KSHATRIYA JAGATHIK SAMUDAY | Global Community">
-    <meta property="twitter:description" content="A global community dedicated to serving Bhavsar descendants in all aspects of life.">
-    <meta property="twitter:image" content="https://www.bhavsarkshatriya.org/assets/img/logo.png">
-    <meta property="twitter:image:alt" content="BKJS Community Logo">
-
-    <!-- Google Site Verification -->
-    <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE_HERE">
-
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Bhavsar Kshatriya Jagathik Samuday",
-      "alternateName": "BKJS",
-      "url": "https://www.bhavsarkshatriya.org/",
-      "logo": "https://www.bhavsarkshatriya.org/assets/img/logo.png",
-      "areaServed": "World",
-      "description": "A global community dedicated to serving Bhavsar descendants in all aspects of life.",
-      "sameAs": [
-        "https://www.facebook.com/bhavsarkshatriya",
-        "https://www.instagram.com/bhavsarkshatriya"
-      ]
-    }
-    </script>
-
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-    <!-- Main CSS File -->
-    <link href="assets/css/main.css" rel="stylesheet">
-
-    <!-- Preload critical resources -->
-    <link rel="preload" href="assets/img/hero-bg.jpg" as="image">
-
-
-  <!-- Google Translate Configuration -->
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,hi,mr,kn,te,ta,ml,pa,gu,bn,ur',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false,
-        multilanguagePage: false
-      }, 'google_translate_element');
-
-      // Helper: Persist and Apply Language Selection
-      const applyStoredLang = () => {
-        const storedLang = localStorage.getItem('googleTranslateLanguage');
-        const select = document.querySelector('.goog-te-combo');
-        if (storedLang && select && select.value !== storedLang) {
-          select.value = storedLang;
-          select.dispatchEvent(new Event('change'));
-        }
-        if (select) {
-          select.addEventListener('change', () => {
-            localStorage.setItem('googleTranslateLanguage', select.value);
-          });
-        }
-      };
-
-      // Observer: Wait for Google Translate Widget to Inject
-      const observer = new MutationObserver((mutations, obs) => {
-        if (document.querySelector('.goog-te-combo')) {
-          applyStoredLang();
-          obs.disconnect();
-        }
-      });
-      
-      const target = document.getElementById('google_translate_element');
-      if (target) observer.observe(target, { childList: true, subtree: true });
-    }
-  </script>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
-
-</head>
- 
-<body class="index-page">
-
-    <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-            <nav class="navmenu d-flex align-items-center">
-                <ul>
-                    <li><a href="index.html" class="nav-link"></a></li>
-                </ul>
-                <!-- Google Translate Widget Container -->
-                <div id="google_translate_element" style="margin-left: 15px;"></div>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list" role="button" aria-label="Toggle Navigation"></i>
-            </nav>
-
-        </div>
-    </header>
-
-    <main class="main">
-
-        <!-- Hero Section -->
-        <section id="hero" class="hero section accent-background">
-
-            <!-- SEO Optimization: Added descriptive alt text for the hero image -->
-            <img src="assets/img/hero-bg.jpg" alt="Bhavsar Kshatriya Jagathik Samuday Community Background" loading="eager">
-
-            <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
-
-                <h1 class="display-1 fw-bold">COMING SOON</h1>
-                <h1 class="display-1 fw-bold notranslate">https://bhavsarkshatriya.org</h1>
-                <br>
-                <p>Honoring Our Heritage, Embracing Progress: Bhavsar Kshatriya Jagathik Samuday's Journey Forward</p>
-                <br>
-                <br>                
-                <div class="audio-player-container text-center">
-                    <audio id="community-anthem" controls preload="auto" controlsList="nodownload" class="w-100" style="max-width: 600px;">
-                        <source src="assets/audio/bhavsar-anthem.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-
-                <!-- Countdown Timer -->
-                <div id="countdown" class="row justify-content-center my-5" role="timer" aria-label="Countdown to launch">
-                    <div class="col-3 col-md-2">
-                        <div class="text-white">
-                            <h1 id="days" class="display-3 fw-bold mb-0">00</h1>
-                            <span class="text-uppercase small">Days</span>
-                        </div>
-                    </div>
-                    <div class="col-3 col-md-2">
-                        <div class="text-white">
-                            <h1 id="hours" class="display-3 fw-bold mb-0">00</h1>
-                            <span class="text-uppercase small">Hours</span>
-                        </div>
-                    </div>
-                    <div class="col-3 col-md-2">
-                        <div class="text-white">
-                            <h1 id="minutes" class="display-3 fw-bold mb-0">00</h1>
-                            <span class="text-uppercase small">Minutes</span>
-                        </div>
-                    </div>
-                    <div class="col-3 col-md-2">
-                        <div class="text-white">
-                            <h1 id="seconds" class="display-3 fw-bold mb-0">00</h1>
-                            <span class="text-uppercase small">Seconds</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
- 
-        </section><!-- /Hero Section -->
-
-        <!-- ======= Social Share Section (New Feature) ======= -->
-        <section id="share" class="share-section section py-5">
-            <div class="container text-center" data-aos="fade-up">
-            <h3 class="mb-3">Share as proud Bhavsar Kshatriya</h3>
-            
-            <!-- Share Statistics Display -->
-            <div class="mb-4">
-                <div class="d-inline-flex align-items-center justify-content-center bg-light rounded-pill px-4 py-2 shadow-sm border">
-                <i class="bi bi-bar-chart-fill text-primary me-2"></i>
-                <span class="fw-bold text-dark">Community Reach:&nbsp;</span>
-                <span id="total-shares" class="fw-bold text-primary">0</span>
-                <span class="text-muted ms-1">shares</span>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-center gap-2 flex-wrap">
-                <!-- WhatsApp -->
-                <a href="https://api.whatsapp.com/send?text=Join%20the%20Bhavsar%20Kshatriya%20Jagathik%20Samuday%20Global%20Community!%20https://www.bhavsarkshatriya.org/" 
-                   target="_blank" rel="noopener noreferrer" class="btn btn-success rounded-circle p-3 share-btn" 
-                   data-platform="whatsapp" aria-label="Share on WhatsApp" title="Share on WhatsApp">
-                <i class="bi bi-whatsapp fs-4"></i>
-                </a>
-                
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.bhavsarkshatriya.org/" 
-                   target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-circle p-3 share-btn" 
-                   data-platform="facebook" aria-label="Share on Facebook" title="Share on Facebook">
-                <i class="bi bi-facebook fs-4"></i>
-                </a>
-                
-                <!-- X (Twitter) -->
-                <a href="https://twitter.com/intent/tweet?url=https://www.bhavsarkshatriya.org/&text=Bhavsar%20Kshatriya%20Jagathik%20Samuday%20Global%20Community" 
-                   target="_blank" rel="noopener noreferrer" class="btn btn-dark rounded-circle p-3 share-btn" 
-                   data-platform="twitter" aria-label="Share on X" title="Share on X">
-                <i class="bi bi-twitter-x fs-4"></i>
-                </a>
-                
-                <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.bhavsarkshatriya.org/" 
-                   target="_blank" rel="noopener noreferrer" class="btn btn-primary rounded-circle p-3 share-btn" 
-                   style="background-color: #0077b5; border-color: #0077b5;" 
-                   data-platform="linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
-                <i class="bi bi-linkedin fs-4"></i>
-                </a>
-
-                <!-- Copy Link -->
-                <button id="copy-link-btn" class="btn btn-secondary rounded-circle p-3 share-btn" 
-                    data-platform="copy" aria-label="Copy Link" title="Copy Link">
-                <i class="bi bi-link-45deg fs-4"></i>
-                </button>
-            </div>
-            </div>
-
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const shareCountElement = document.getElementById('total-shares');
-                
-                // FOR LOCAL TESTING: Use http://localhost:8080
-                // FOR PRODUCTION: Replace with your Google Cloud Run service URL
-                const BACKEND_URL = 'http://localhost:8080'; 
-
-                const BASE_COUNT = 153369; // Your base number
-
-                // Function to fetch the initial count when the page loads
-                function fetchInitialCount() {
-                    if (!BACKEND_URL) {
-                        shareCountElement.textContent = BASE_COUNT.toLocaleString();
-                        return;
-                    }
-                    fetch(`${BACKEND_URL}/total`)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.result === 'success') {
-                                const totalCount = BASE_COUNT + (parseInt(data.count) || 0);
-                                shareCountElement.textContent = totalCount.toLocaleString();
-                            } else {
-                                // If backend call fails, just show the base count
-                                shareCountElement.textContent = BASE_COUNT.toLocaleString();
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching initial count:', error);
-                            // On error, fall back to showing the base count
-                            shareCountElement.textContent = BASE_COUNT.toLocaleString();
-                        });
-                }
-
-                // Function to tell the backend to increment the count for a specific platform
-                function incrementAndFetchCount(platform) {
-                    if (!BACKEND_URL || !platform) return;
-
-                    fetch(`${BACKEND_URL}/increment`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ platform: platform }) // Send the platform name
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.result === 'success') {
-                            const totalCount = BASE_COUNT + (parseInt(data.count) || 0);
-                            animateValue(shareCountElement, parseInt(shareCountElement.textContent.replace(/,/g, '')) || BASE_COUNT, totalCount, 500);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error incrementing count:', error);
-                    });
-                }
-
-                // --- Call the function to set the initial value on page load ---
-                fetchInitialCount();
-
-                // Add click listeners to all share buttons
-                document.querySelectorAll('.share-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const platform = this.getAttribute('data-platform');
-                        
-                        // When a button is clicked, call the backend with the platform name
-                        incrementAndFetchCount(platform);
-
-                        // Handle the copy link functionality
-                        if (platform === 'copy') {
-                            navigator.clipboard.writeText('https://www.bhavsarkshatriya.org/')
-                                .then(() => alert('Link copied to clipboard!'));
-                        }
-                    });
-                });
-
-                // Simple number animation function
-                function animateValue(obj, start, end, duration) {
-                    if (start === end) return;
-                    let startTimestamp = null;
-                    const step = (timestamp) => {
-                        if (!startTimestamp) startTimestamp = timestamp;
-                        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                        obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
-                        if (progress < 1) {
-                            window.requestAnimationFrame(step);
-                        }
-                    };
-                    window.requestAnimationFrame(step);
-                }
-            });
-            </script>
-        </section>
-        <!-- End Social Share Section -->
-
-        <script>
-            // Set the date we're counting down to
-            var countDownDate = new Date("Dec 24, 2025 23:59:00").getTime();
-
-            // Update the count down every 1 second
-            var x = setInterval(function() {
-
-                // Get today's date and time
-                var now = new Date().getTime();
-
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
-
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Output the result in an element with id="demo"
-                // Added checks to ensure elements exist before setting innerHTML to prevent console errors
-                if(document.getElementById("days")) document.getElementById("days").innerHTML = days < 10 ? '0' + days : days;
-                if(document.getElementById("hours")) document.getElementById("hours").innerHTML = hours < 10 ? '0' + hours : hours;
-                if(document.getElementById("minutes")) document.getElementById("minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes;
-                if(document.getElementById("seconds")) document.getElementById("seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds;
-
-                // If the count down is over, write some text 
-                if (distance < 0) {
-                    clearInterval(x);
-                    var countdownEl = document.getElementById("countdown");
-                    if(countdownEl) countdownEl.innerHTML = "<h3 class='text-dark'>WE ARE LIVE!</h3>";
-                }
-            }, 1000);
-        </script>
-    </main>
-
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-bottom d-flex flex-wrap justify-content-center align-items-center">
-                        <p class="mb-0 small text-center">
-                            &copy; <span id="year"></span> BHAVSAR KSHATRIYA JAGATHIK SAMUDAY. All rights reserved.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- End Footer -->
-
-
-    <!-- Preloader -->
-    <div id="preloader"></div>
-
-    <!-- Vendor JS Files -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/php-email-form/validate.js"></script>
-    <script src="assets/vendor/aos/aos.js"></script>
-    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-
-    <!-- Google Fonts Web Font Loader (Ensures fonts are ready for translation) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-    <script>
-      WebFont.load({
-        google: {
-          families: ['Roboto:300,400,500,700', 'Poppins:300,400,500,600,700', 'Raleway:300,400,500,600,700']
-        }
-      });
-    </script>
-
-    <!-- Main JS File -->
-    <script src="assets/js/main.js"></script>
-
-    <script>
-        // --- Critical Resource Optimization (Immediate Execution) ---
-        (function() {
-            // Select images that should be prioritized (Hero & Logo)
-            // We check for existing DOM elements to apply decoding immediately
-            const criticalImages = document.querySelectorAll('.logo img, #hero img');
-            
-            criticalImages.forEach(img => {
-                // Ensure critical images are not lazy loaded
-                img.setAttribute('loading', 'eager');
-                
-                // Use decode() to process image data off the main thread
-                // This prevents UI jank during the initial paint
-                if (img.complete) return;
-                if ('decode' in img) {
-                    img.decode().catch(() => { /* ignore decode errors */ });
-                }
-            });
-        })();
-
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            // --- UI/UX: Dropdown Menus ---
-            const dropdowns = document.querySelectorAll('.navmenu .dropdown');
-            const closeAllDropdowns = () => dropdowns.forEach(d => d.classList.remove('open'));
-
-            dropdowns.forEach(dropdown => {
-                // Desktop Hover
-                dropdown.addEventListener('mouseenter', () => dropdown.classList.add('open'));
-                dropdown.addEventListener('mouseleave', () => dropdown.classList.remove('open'));
-
-                // Mobile/Touch Click
-                const link = dropdown.querySelector('a');
-                if (link) {
-                    link.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const wasOpen = dropdown.classList.contains('open');
-                        closeAllDropdowns();
-                        if (!wasOpen) dropdown.classList.add('open');
-                    });
-                }
-            });
-
-            // Close on outside click
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.navmenu .dropdown')) closeAllDropdowns();
-            });
-
-            // --- Performance: Smart Lazy Loading ---
-            // Apply lazy loading only to images that don't have a loading attribute
-            // and are NOT part of the critical header/hero sections
-            const images = document.querySelectorAll('img:not([loading])');
-            images.forEach(img => {
-                if (!img.closest('#header') && !img.closest('#hero')) {
-                    img.setAttribute('loading', 'lazy');
-                }
-            });
-
-      // 1. Security: Disable Right Click & Copy
-      const disallowKeys = ['a','c','x','s','u','p'];
-      document.body.style.userSelect = 'none';
-      document.body.style.webkitUserSelect = 'none';
-      
-      ['copy','cut','dragstart','selectstart'].forEach(evt => {
-        document.addEventListener(evt, e => e.preventDefault());
-      });
-      document.addEventListener('contextmenu', e => e.preventDefault());
-      document.addEventListener('keydown', e => {
-        const k = e.key.toLowerCase();
-        if ((e.ctrlKey || e.metaKey) && disallowKeys.includes(k)) e.preventDefault();
-        if (k === 'f12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(k)) || (e.ctrlKey && k === 'u')) {
-          e.preventDefault();
-        }
-      });
-
-      // 2. Lazy Load Background Images
-      if ('IntersectionObserver' in window) {
-        const bgLazy = document.querySelectorAll('[data-bg]');
-        const io = new IntersectionObserver(entries => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              const el = e.target;
-              el.style.backgroundImage = `url(${el.getAttribute('data-bg')})`;
-              io.unobserve(el);
-            }
-          });
-        }, { rootMargin: '300px 0px' });
-        bgLazy.forEach(el => io.observe(el));
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
       }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
 
-      // 3. Font Display Swap Fix
-      document.fonts && document.fonts.ready.then(() => {
-        Array.from(document.styleSheets).forEach(ss => {
-          try {
-            Array.from(ss.cssRules || []).forEach(r => {
-              if (r.type === CSSRule.FONT_FACE_RULE && !/font-display/i.test(r.cssText)) {
-                r.style.fontDisplay = 'swap';
-              }
-            });
-          } catch (_) {}
-        });
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
       });
-
-            // --- Security: Content Protection ---
-            const preventAction = (e) => { e.preventDefault(); return false; };
-            
-            // CSS-based selection disabling is handled in styles, but we enforce here too
-            document.body.style.userSelect = 'none';
-            document.body.style.webkitUserSelect = 'none';
-            
-            document.addEventListener('contextmenu', preventAction);
-            ['copy', 'cut', 'dragstart', 'selectstart'].forEach(evt => 
-                document.addEventListener(evt, preventAction)
-            );
-            
-            document.addEventListener('keydown', (e) => {
-                // Block Ctrl/Cmd + A, C, X, S, U
-                if ((e.ctrlKey || e.metaKey) && /^[acxsu]$/i.test(e.key)) {
-                    preventAction(e);
-                }
-            });
-
-            // --- Footer Year ---
-            const yearSpan = document.getElementById('year');
-            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-        });
-
-        // --- Window Load (Final Assets Loaded) ---
-        window.addEventListener('load', function () {
-            const preloader = document.getElementById('preloader');
-            
-            // Initialize AOS
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    duration: 1000,
-                    easing: 'ease-in-out',
-                    once: true,
-                    mirror: false
-                });
-            }
-
-            // Smooth removal of preloader
-            if (preloader) {
-                preloader.style.transition = 'opacity 0.5s ease';
-                preloader.style.opacity = '0';
-                setTimeout(() => preloader.style.display = 'none', 500);
-            }
-        });
-
-        // --- Fallback: Force remove preloader ---
-        // Failsafe in case the 'load' event hangs due to a third-party script
-        setTimeout(function() {
-            const preloader = document.getElementById('preloader');
-            if (preloader && preloader.style.display !== 'none') {
-                preloader.style.display = 'none';
-            }
-        }, 4000);
     </script>
-
-</body>
-
+  </body>
 </html>
-
