@@ -460,15 +460,9 @@
                 }
             });
 
-            // --- Performance: Lazy Loading & Defer ---
+            // --- Performance: Lazy Loading ---
             document.querySelectorAll('img').forEach(img => {
                 if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
-            });
-
-            document.querySelectorAll('script[src]').forEach(script => {
-                if (!script.hasAttribute('defer') && !script.hasAttribute('async')) {
-                    script.setAttribute('defer', '');
-                }
             });
 
             // --- Security: Anti-Copy/Paste ---
@@ -499,16 +493,15 @@
 
             // Initialize AOS
             if (typeof AOS !== 'undefined') AOS.init();
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // --- Scroll Top ---
-        const scrollTopBtn = document.getElementById('scroll-top');
-        if (scrollTopBtn) {
-            scrollTopBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
+        // Fallback: Force remove preloader after 4 seconds if load event hangs
+        setTimeout(function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) preloader.style.display = 'none';
+        }, 4000);
 
     </script>
 
