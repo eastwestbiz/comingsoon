@@ -1398,8 +1398,8 @@ function initPreloader() {
 //* initLazyLoading(); function initializes lazy loading for images to improve page load performance.
 
 function initLazyLoading() {
-    // Select all elements with data-src or data-srcset attributes
-    const lazyElements = document.querySelectorAll('[data-src], [data-srcset]');
+    // Select all elements with data-src, data-srcset, or data-bg attributes
+    const lazyElements = document.querySelectorAll('[data-src], [data-srcset], [data-bg]');
     
     // Check if IntersectionObserver is supported
     if ('IntersectionObserver' in window) {
