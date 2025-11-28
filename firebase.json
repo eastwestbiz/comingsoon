@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "bhavasar-org",
     "public": ".",
     "ignore": [
       "firebase.json",
