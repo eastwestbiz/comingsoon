@@ -1674,6 +1674,8 @@ function initGoogleTranslatePersistence() {
   }, 500);
 
 } // <-- Close initGoogleTranslatePersistence
+
+
 // End of Google Translate persistence script
                                 
 //-----------------------------------------------
@@ -1684,74 +1686,81 @@ function initGoogleTranslatePersistence() {
 // It ensures the anthem plays smoothly and highlights lyrics in sync with the audio playback.    
 
 document.addEventListener('DOMContentLoaded', function() {
-    const anthemAudio = document.getElementById('community-anthem');
-    const lyricLines = document.querySelectorAll('.lyric-line');
+  const anthemAudio = document.getElementById('community-anthem');
+  const lyricLines = document.querySelectorAll('.lyric-line');
+  
+  if (anthemAudio) {
+    // Disable download controls and context menu
+    anthemAudio.setAttribute('controlsList', 'nodownload');
+    anthemAudio.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // Set audio to loop
+    anthemAudio.loop = true;
     
-    if (anthemAudio) {
-        // Set audio to loop
-        anthemAudio.loop = true;
-        
-        // Auto-play with user interaction fallback
-        const playAnthem = () => {
-            // Try to play muted first (more likely to be allowed by browsers)
-            anthemAudio.muted = false;
-            anthemAudio.play().then(() => {
-                // Once playing, unmute gradually
-                setTimeout(() => {
-                    anthemAudio.muted = false;
-                }, 1000);
-            }).catch(e => {
-                // Show play button if autoplay fails
-                const playBtn = document.createElement('button');
-                playBtn.className = 'anthem-play-btn';
-                playBtn.innerHTML = '▶ Play Bhavsar Kshatriya Anthem';
-                playBtn.style.cssText = `
-                    display: block;
-                    margin: 20px auto;
-                    padding: 12px 30px;
-                    background: var(--accent-color);
-                    color: white;
-                    border: none;
-                    border-radius: 50px;
-                    font-size: 18px;
-                    cursor: pointer;
-                    transition: all 0.3s;
-                `;
-                playBtn.onmouseover = () => playBtn.style.background = 'color-mix(in srgb, var(--accent-color), transparent 20%)';
-                playBtn.onmouseout = () => playBtn.style.background = 'var(--accent-color)';
-                playBtn.onclick = () => {
-                    anthemAudio.play();
-                    playBtn.remove();
-                };
-                document.querySelector('.audio-player-container').appendChild(playBtn);
-            });
+    // Auto-play with user interaction fallback
+    const playAnthem = () => {
+      // Try to play muted first (more likely to be allowed by browsers)
+      anthemAudio.muted = false;
+      anthemAudio.play().then(() => {
+        // Once playing, unmute gradually
+        setTimeout(() => {
+          anthemAudio.muted = false;
+        }, 1000);
+      }).catch(e => {
+        // Show play button if autoplay fails
+        const playBtn = document.createElement('button');
+        playBtn.className = 'anthem-play-btn';
+        playBtn.innerHTML = '▶ Play Bhavsar Kshatriya Anthem';
+        playBtn.style.cssText = `
+          display: block;
+          margin: 20px auto;
+          padding: 12px 30px;
+          background: var(--accent-color);
+          color: white;
+          border: none;
+          border-radius: 50px;
+          font-size: 18px;
+          cursor: pointer;
+          transition: all 0.3s;
+        `;
+        playBtn.onmouseover = () => playBtn.style.background = 'color-mix(in srgb, var(--accent-color), transparent 20%)';
+        playBtn.onmouseout = () => playBtn.style.background = 'var(--accent-color)';
+        playBtn.onclick = () => {
+          anthemAudio.play();
+          playBtn.remove();
         };
+        document.querySelector('.audio-player-container').appendChild(playBtn);
+      });
+    };
+    
+    // Try to auto-play on page load
+    playAnthem();
+    
+    // Lyrics highlighting
+    anthemAudio.addEventListener('timeupdate', () => {
+      const currentTime = anthemAudio.currentTime;
+      
+      lyricLines.forEach(line => {
+        const lineTime = parseFloat(line.dataset.time);
+        const nextLine = line.nextElementSibling;
+        const nextTime = nextLine ? parseFloat(nextLine.dataset.time) : Number.MAX_VALUE;
         
-        // Try to auto-play on page load
-        playAnthem();
-        
-        // Lyrics highlighting
-        anthemAudio.addEventListener('timeupdate', () => {
-            const currentTime = anthemAudio.currentTime;
-            
-            lyricLines.forEach(line => {
-                const lineTime = parseFloat(line.dataset.time);
-                const nextLine = line.nextElementSibling;
-                const nextTime = nextLine ? parseFloat(nextLine.dataset.time) : Number.MAX_VALUE;
-                
-                if (currentTime >= lineTime && currentTime < nextTime) {
-                    line.classList.add('active');
-                } else {
-                    line.classList.remove('active');
-                }
-            });
-        });
-        
-        // Reset lyrics when song ends
-        anthemAudio.addEventListener('ended', () => {
-            lyricLines.forEach(line => line.classList.remove('active'));
-        });
-    }
+        if (currentTime >= lineTime && currentTime < nextTime) {
+          line.classList.add('active');
+        } else {
+          line.classList.remove('active');
+        }
+      });
+    });
+    
+    // Reset lyrics when song ends
+    anthemAudio.addEventListener('ended', () => {
+      lyricLines.forEach(line => line.classList.remove('active'));
+    });
+  }
 });              
 
 //-----------------------------------------------
