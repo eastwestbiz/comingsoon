@@ -427,55 +427,123 @@
     <script src="assets/js/main.js"></script>
 
     <script>
+        // --- Critical Resource Optimization (Immediate Execution) ---
+        (function() {
+            // Select images that should be prioritized (Hero & Logo)
+            // We check for existing DOM elements to apply decoding immediately
+            const criticalImages = document.querySelectorAll('.logo img, #hero img');
+            
+            criticalImages.forEach(img => {
+                // Ensure critical images are not lazy loaded
+                img.setAttribute('loading', 'eager');
+                
+                // Use decode() to process image data off the main thread
+                // This prevents UI jank during the initial paint
+                if (img.complete) return;
+                if ('decode' in img) {
+                    img.decode().catch(() => { /* ignore decode errors */ });
+                }
+            });
+        })();
+
         document.addEventListener('DOMContentLoaded', function () {
             
             // --- UI/UX: Dropdown Menus ---
             const dropdowns = document.querySelectorAll('.navmenu .dropdown');
-            
-            // Desktop Hover
+            const closeAllDropdowns = () => dropdowns.forEach(d => d.classList.remove('open'));
+
             dropdowns.forEach(dropdown => {
+                // Desktop Hover
                 dropdown.addEventListener('mouseenter', () => dropdown.classList.add('open'));
                 dropdown.addEventListener('mouseleave', () => dropdown.classList.remove('open'));
-            });
 
-            // Mobile/Touch Click
-            document.querySelectorAll('.navmenu .dropdown > a').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const dropdown = this.parentElement;
-                    const wasOpen = dropdown.classList.contains('open');
-                    
-                    // Close all others
-                    dropdowns.forEach(d => d.classList.remove('open'));
-                    
-                    // Toggle current
-                    if (!wasOpen) dropdown.classList.add('open');
-                });
+                // Mobile/Touch Click
+                const link = dropdown.querySelector('a');
+                if (link) {
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const wasOpen = dropdown.classList.contains('open');
+                        closeAllDropdowns();
+                        if (!wasOpen) dropdown.classList.add('open');
+                    });
+                }
             });
 
             // Close on outside click
             document.addEventListener('click', (e) => {
-                if (!e.target.closest('.navmenu .dropdown')) {
-                    dropdowns.forEach(d => d.classList.remove('open'));
+                if (!e.target.closest('.navmenu .dropdown')) closeAllDropdowns();
+            });
+
+            // --- Performance: Smart Lazy Loading ---
+            // Apply lazy loading only to images that don't have a loading attribute
+            // and are NOT part of the critical header/hero sections
+            const images = document.querySelectorAll('img:not([loading])');
+            images.forEach(img => {
+                if (!img.closest('#header') && !img.closest('#hero')) {
+                    img.setAttribute('loading', 'lazy');
                 }
             });
 
-            // --- Performance: Lazy Loading ---
-            document.querySelectorAll('img').forEach(img => {
-                if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
-            });
+      // 1. Security: Disable Right Click & Copy
+      const disallowKeys = ['a','c','x','s','u','p'];
+      document.body.style.userSelect = 'none';
+      document.body.style.webkitUserSelect = 'none';
+      
+      ['copy','cut','dragstart','selectstart'].forEach(evt => {
+        document.addEventListener(evt, e => e.preventDefault());
+      });
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', e => {
+        const k = e.key.toLowerCase();
+        if ((e.ctrlKey || e.metaKey) && disallowKeys.includes(k)) e.preventDefault();
+        if (k === 'f12' || (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(k)) || (e.ctrlKey && k === 'u')) {
+          e.preventDefault();
+        }
+      });
 
-            // --- Security: Anti-Copy/Paste ---
+      // 2. Lazy Load Background Images
+      if ('IntersectionObserver' in window) {
+        const bgLazy = document.querySelectorAll('[data-bg]');
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              const el = e.target;
+              el.style.backgroundImage = `url(${el.getAttribute('data-bg')})`;
+              io.unobserve(el);
+            }
+          });
+        }, { rootMargin: '300px 0px' });
+        bgLazy.forEach(el => io.observe(el));
+      }
+
+      // 3. Font Display Swap Fix
+      document.fonts && document.fonts.ready.then(() => {
+        Array.from(document.styleSheets).forEach(ss => {
+          try {
+            Array.from(ss.cssRules || []).forEach(r => {
+              if (r.type === CSSRule.FONT_FACE_RULE && !/font-display/i.test(r.cssText)) {
+                r.style.fontDisplay = 'swap';
+              }
+            });
+          } catch (_) {}
+        });
+      });
+
+            // --- Security: Content Protection ---
             const preventAction = (e) => { e.preventDefault(); return false; };
             
+            // CSS-based selection disabling is handled in styles, but we enforce here too
             document.body.style.userSelect = 'none';
             document.body.style.webkitUserSelect = 'none';
             
             document.addEventListener('contextmenu', preventAction);
-            ['copy', 'cut', 'dragstart', 'selectstart'].forEach(evt => document.addEventListener(evt, preventAction));
+            ['copy', 'cut', 'dragstart', 'selectstart'].forEach(evt => 
+                document.addEventListener(evt, preventAction)
+            );
             
             document.addEventListener('keydown', (e) => {
-                if ((e.ctrlKey || e.metaKey) && ['a', 'c', 'x', 's', 'u'].includes(e.key.toLowerCase())) {
+                // Block Ctrl/Cmd + A, C, X, S, U
+                if ((e.ctrlKey || e.metaKey) && /^[acxsu]$/i.test(e.key)) {
                     preventAction(e);
                 }
             });
@@ -485,27 +553,40 @@
             if (yearSpan) yearSpan.textContent = new Date().getFullYear();
         });
 
-        // --- Window Load ---
+        // --- Window Load (Final Assets Loaded) ---
         window.addEventListener('load', function () {
-            // Remove Preloader
             const preloader = document.getElementById('preloader');
-            if (preloader) preloader.style.display = 'none';
-
+            
             // Initialize AOS
-            if (typeof AOS !== 'undefined') AOS.init();
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 1000,
+                    easing: 'ease-in-out',
+                    once: true,
+                    mirror: false
+                });
+            }
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Smooth removal of preloader
+            if (preloader) {
+                preloader.style.transition = 'opacity 0.5s ease';
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 500);
+            }
         });
 
-        // Fallback: Force remove preloader after 4 seconds if load event hangs
+        // --- Fallback: Force remove preloader ---
+        // Failsafe in case the 'load' event hangs due to a third-party script
         setTimeout(function() {
             const preloader = document.getElementById('preloader');
-            if (preloader) preloader.style.display = 'none';
+            if (preloader && preloader.style.display !== 'none') {
+                preloader.style.display = 'none';
+            }
         }, 4000);
-
     </script>
 
 </body>
 
 </html>
 
+\
